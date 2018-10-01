@@ -53,4 +53,23 @@ export default {
 		padding-left: 35px;
 		font-weight: normal;
 	}
+	.adminBtn {
+		padding: 10px;
+		border-radius: 5px;
+		border: 0;
+		cursor: pointer;
+		transition: all 0.24s;
+		background-color: #00C9A8;
+		color: #fff;
+	}
+	.adminBtn:hover {
+		background-color: #0BAD93;
+	}
+	.adminBtn:active {
+		opacity: 0.7;
+	}
+	.error {
+		border: 1px solid firebrick;
+		outline: none;
+	}
 </style>

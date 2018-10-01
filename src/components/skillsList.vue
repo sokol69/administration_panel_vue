@@ -14,7 +14,7 @@
 			</skills-item>
 		</table>
 		<div class="addNew">
-			<button class="addNew__btn"
+			<button class="addNew__btn adminBtn"
 			@click="addSkill"
 			>Добавить новый</button>
 			<input type="text" class="addNew__input"
@@ -103,28 +103,11 @@ export default {
 	}
 	.addNew__btn {
 		margin-right: 27px;
-		padding: 10px;
-		border-radius: 5px;
-		border: 0;
-		cursor: pointer;
-		transition: all 0.24s;
-		background-color: #00C9A8;
-		color: #fff;
-	}
-	.addNew__btn:hover {
-		background-color: #0BAD93;
-	}
-	.addNew__btn:active {
-		opacity: 0.7;
 	}
 	.addNew__input {
 		padding: 9px;
 		border: 1px solid lightgray;
 		border-radius: 5px;
-	}
-	.error {
-		border: 1px solid firebrick;
-		outline: none;
 	}
 	.errorMessage {
 		padding-left: 15px;
