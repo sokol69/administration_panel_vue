@@ -2,7 +2,7 @@
 	<ul class="tabsList">
 		<li class="tablist__item"
 		v-for="tab in tabs"
-		:key="tab"
+		:key="tab.href"
 		>
 			<router-link class="tablist__link"
 			:to="tab.href"
@@ -59,7 +59,7 @@ export default {
 		text-decoration: none;
 	}
 	.tablist__link--active {
-		background-color: #F4F4F7;
+		background-color: #FFF;
 		color: #00C9A8;
 	}
 </style>

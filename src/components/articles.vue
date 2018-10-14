@@ -2,58 +2,117 @@
 	<div class="adminBlog">
 		<h2 class="subtitle">Страница "Блог"</h2>
 		<div class="addNode">
-			<div class="addNode__title">Добавить запись</div>
-
-			<input type="text" class="addNode__name addNode__input" placeholder="Название"
-			v-model="newArticle"
-			:class="{error: validation.hasError('newArticle')}"
-			>
-			<div class="errorMessage">
-				{{ validation.firstError('newArticle') }}
+			<div class="addNode__title thirdTitle">Добавить запись</div>
+			<div class="addNode__inputWrap">
+				<input type="text" class="addNode__name addNode__input adminInput" placeholder="Название"
+				v-model="newArticle"
+				:class="{error: validation.hasError('newArticle')}"
+				>
+				<div class="errorMessage">
+					{{ validation.firstError('newArticle') }}
+				</div>
 			</div>
-			<input type="text" class="addNode__date addNode__input" placeholder="Дата">
+			<div class="addNode__inputWrap">
+				<!-- <input type="text" class="addNode__date addNode__input adminInput" placeholder="Дата (дд.мм.гг)"
+				v-model="newArticleDate"
+				:class="{error: validation.hasError('newArticleDate')}"
+				> -->
+				<masked-input class="addNode__date addNode__input adminInput"
+				placeholder="Дата (дд.мм.гг)"
+				v-model="newArticleDate"
+				mask="11.11.1111"
+				:class="{error: validation.hasError('newArticleDate')}"
+				/>
+				<div class="errorMessage">
+					{{ validation.firstError('newArticleDate') }}
+				</div>
+			</div>
 
-			<textarea class="addNode__content addNode__input" cols="30" rows="20" placeholder="Содержание"></textarea>
+			<div class="addNode__inputWrap">
+				<textarea class="addNode__content addNode__input adminInput" cols="30" rows="20" placeholder="Содержание"
+				v-model="newArticleContent"
+				:class="{error: validation.hasError('newArticleContent')}"
+				>
+				</textarea>
+				<div class="errorMessage">
+					{{ validation.firstError('newArticleContent') }}
+				</div>
+			</div>
+		
 			<button class="adminBtn addNode__btn"
 			@click="addArticle"
 			>
 				Добавить
 			</button>
 		</div>
-		<ul class="articlesList">
-			<li class="articlesList__item">test article</li>
-		</ul>
+		<div class="articlesList">
+			<div class="articlesList__title thirdTitle">Список статей:</div>
+			<article-item
+			v-for="article in articles"
+			:key="article.id"
+			:article="article"
+			>
+			</article-item>
+		</div>
 	</div>
 </template>
 
 <script>
-import { Validator } from "simple-vue-validator";
-import {mapMutations} from 'vuex';
+import articleItem from './articleItem';
+import {mapMutations, mapActions, mapGetters} from 'vuex';
+import { Validator } from 'simple-vue-validator';
+import MaskedInput from 'vue-masked-input'
 export default {
 	mixins: [require("simple-vue-validator").mixin],
 	validators: {
 		newArticle(value) {
 			return Validator.value(value).required('Поле должно быть заполнено');
+		},
+		newArticleDate(value) {
+			return Validator.value(value).required('Поле должно быть заполнено');
+		},
+		newArticleContent(value) {
+			return Validator.value(value).required('Поле должно быть заполнено');
 		}
+	},
+	props: {
+		//articles: Array
 	},
 	data() {
 		return {
-			newArticle: ''
+			newArticle: '',
+			newArticleDate: '',
+			newArticleContent: ''
 		}
+	},
+	computed: {
+		...mapGetters(['articles'])
 	},
 	methods: {
 		...mapMutations(['addNewArticle']),
+		...mapActions(['fetchArticles']),
 		addArticle() {
 			this.$validate().then(succes => {
 				if (!succes) return;
 				this.addNewArticle({
-					name: this.newArticle
+					id: Math.round(Math.random() * 10000),
+					name: this.newArticle,
+					date: this.newArticleDate,
+					content: this.newArticleContent
 				});
-				alert('test');
 				this.newArticle = '';
+				this.newArticleDate = '';
+				this.newArticleContent = '';
 				this.validation.reset();
 			})
 		}
+	},
+	created() {
+		this.fetchArticles();
+	},
+	components: {
+		articleItem,
+		MaskedInput
 	}
 }
 </script>
@@ -65,16 +124,13 @@ export default {
 		padding-top: 20px;
 		padding-left: 35px;
 	}
-	.addNode__title {
-		padding-bottom: 20px;
-		font-weight: bold;
+	.addNode__inputWrap {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
 	}
 	.addNode__input {
 		width: 200px;
-		margin-bottom: 20px;
-		padding: 10px 20px;
-		border: 0;
-		border-radius: 5px;
 	}
 	.addNode__content {
 		width: 700px;
@@ -83,7 +139,16 @@ export default {
 		width: 150px;
 	}
 	.articlesList {
-		padding-top: 20px;
+		padding-top: 40px;
+		padding-left: 30px;
+		padding-bottom: 20px;
 		list-style: none;
+	}
+	.articlesList__title {
+		padding-top: 10px;
+	}
+	.error {
+		border: 1px solid firebrick;
+		outline: none;
 	}
 </style>

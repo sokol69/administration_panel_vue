@@ -53,6 +53,15 @@ export default {
 		padding-left: 35px;
 		font-weight: normal;
 	}
+	.thirdTitle {
+		padding-bottom: 20px;
+		font-weight: bold;
+	}
+	.adminInput {
+		padding: 10px 20px;
+		border: 1px solid transparent;
+		border-radius: 5px;
+	}
 	.adminBtn {
 		padding: 10px;
 		border-radius: 5px;
@@ -68,8 +77,8 @@ export default {
 	.adminBtn:active {
 		opacity: 0.7;
 	}
-	.error {
-		border: 1px solid firebrick;
-		outline: none;
+	.errorMessage {
+		padding-left: 15px;
+		color: firebrick;
 	}
 </style>

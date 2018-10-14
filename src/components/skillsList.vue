@@ -1,8 +1,8 @@
 <template>
 	<div class="skillsList">
-		<h3>
+		<div class="thirdTitle">
 			{{ skillType }}
-		</h3>
+		</div>
 		<table class="skillsList__table">
 			<skills-item
 			v-for="skill in skills"
@@ -32,7 +32,7 @@
 <script>
 import skillsItem from './skillsItem';
 import {mapMutations} from 'vuex';
-import { Validator } from "simple-vue-validator";
+import { Validator } from 'simple-vue-validator';
 export default {
 	mixins: [require("simple-vue-validator").mixin],
 	validators: {
@@ -102,16 +102,17 @@ export default {
 		align-items: center;
 	}
 	.addNew__btn {
-		margin-right: 27px;
+		margin-right: 25px;
+		padding: 10px 18px;
 	}
 	.addNew__input {
 		padding: 9px;
-		border: 1px solid lightgray;
+		border: 0;
 		border-radius: 5px;
 	}
-	.errorMessage {
-		padding-left: 15px;
-		color: firebrick;
+	.error {
+		border: 1px solid firebrick;
+		outline: none;
 	}
 </style>
 

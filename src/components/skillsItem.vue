@@ -1,23 +1,22 @@
 <template>
-<div>
-	<tr class="skillsItem">
-		<td class="skillsItem__name">
-			{{skill.name}}
-		</td>
-		<td>
-			<input type="text" class="skillsItem__input"
-			:value="skill.percents"
-			>
-		</td>
-		<td class="skillsItem__units">%</td>
-		<td class="skillsItem__btnWrap">
-			<button class="skillsItem__btn"
-			@click="removeSkill"
-			>Удалить</button>
-		</td>
-	</tr>
-</div>
-
+	<div>
+		<tr class="skillsItem">
+			<td class="skillsItem__name">
+				{{skill.name}}
+			</td>
+			<td>
+				<input type="text" class="skillsItem__input"
+				:value="skill.percents"
+				>
+			</td>
+			<td class="skillsItem__units">%</td>
+			<td class="skillsItem__btnWrap">
+				<button class="skillsItem__btn"
+				@click="removeSkill"
+				>Удалить</button>
+			</td>
+		</tr>
+	</div>
 </template>
 
 <script>
@@ -41,7 +40,7 @@ export default {
 		padding-bottom: 20px;
 	}
 	.skillsItem__name {
-		width: 115px;
+		width: 120px;
 		padding-right: 20px;
 		overflow: hidden;
 		white-space: nowrap;
@@ -58,20 +57,20 @@ export default {
 		padding-left: 10px;
 	}
 	.skillsItem__btnWrap {
-		padding-left: 20px;
+		padding-left: 28px;
 	}
 	.skillsItem__btn {
 		padding: 10px;
 		text-align: center;
 		border: 0;
 		border-radius: 5px;
-		background-color: #00C9A8;
+		background-color: #FD9156;
 		color: #fff;
 		transition: all 0.3s;
 		cursor: pointer;
 	}
 	.skillsItem__btn:hover {
-		background-color: #0BAD93;
+		background-color: #FF7922;
 	}
 	.skillsItem__btn:active {
 		opacity: 0.7;
