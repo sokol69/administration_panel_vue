@@ -10,6 +10,9 @@ const works = {
 	mutations: {
 		addNewWork(state, work) {
 			state.data.push(work);
+		},
+		deleteWork(state, workID) {
+			state.data = state.data.filter(item => item.id !== workID);
 		}
 	},
 	actions: {
@@ -31,7 +34,7 @@ const works = {
 					"id": 3,
 					"name": "Простой сайт портфолио",
 					"tech": "HTML, CSS",
-					"href": "https://github.com/sokol69/burgers"
+					"href": "https://github.com"
 				}
 			]
 		}

@@ -52,22 +52,38 @@
 				Добавить
 			</button>
 		</div>
-		<div class="worksList">
+		<div class="worksList"
+		v-if="works.length > 0"
+		>
 			<div class="worksList__title thirdTitle">
 				Список работ:
 			</div>
-			<works-item
-			v-for="work in works"
-			:key="work.id"
-			:work="work"
-			>
-			</works-item>
+			<table class="worksList__table">
+				<thead class="worksList__head">
+					<tr>
+						<th class="worksList__headItem">Название</th>
+						<th class="worksList__headItem">Технологии</th>
+						<th class="worksList__headItem">Ссылка</th>
+						<th class="worksList__headItem"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<works-item
+					v-for="work in works"
+					:key="work.id"
+					:work="work"
+					@removeWork="removeWork"
+					>
+					</works-item>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </template>
 
 <script>
 import worksItem from './worksItem';
+import modal from './modal';
 import {mapMutations, mapActions, mapGetters} from 'vuex';
 import { Validator } from 'simple-vue-validator';
 export default {
@@ -89,7 +105,7 @@ export default {
 			newWorkTech: '',
 			newWorkHref: '',
 			fileName: '',
-			fileBtnText: 'Выберите файл'
+			fileBtnText: 'Выберите файл',
 		}
 
 	},
@@ -97,7 +113,7 @@ export default {
 		...mapGetters(['works'])
 	},
 	methods: {
-		...mapMutations(['addNewWork']),
+		...mapMutations(['addNewWork', 'deleteWork']),
 		...mapActions(['fetchWorks']),
 		addWork() {
 			this.$validate().then(succes => {
@@ -123,7 +139,10 @@ export default {
 				this.fileName = '';
 				this.fileBtnText = 'Выберите файл';
 			}
-		}
+		},
+		removeWork(workID) {
+			this.deleteWork(workID);
+		},
 	},
 	created() {
 		this.fetchWorks();
@@ -151,14 +170,19 @@ export default {
 	.addWork__input {
 		width: 200px;
 	}
+	.addWork__btn {
+		width: 100%;
+		max-width: 242px;
+		margin-top: 10px;
+	}
 	.file-upload {
 	position: relative;
-	overflow: hidden;
-	width: 20%;
+	width: 233px;
 	height: 20px;
+	padding: 8px 4px;
+	overflow: hidden;
 	background: gray;
 	border-radius: 3px;
-	padding: 8px 4px;
 	color: #fff;
 	text-align: center;
 	transition: all 0.3s;
@@ -188,5 +212,19 @@ export default {
 	.worksList {
 		padding-top: 40px;
 		padding-left: 40px;
+		padding-right: 40px;
+	}
+	.worksList__table {
+		width: 100%;
+	}
+	.worksList__head {
+		margin-bottom: 10px;
+		background-color: #EDEEE6;
+	}
+	.worksList__headItem {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		border-radius: 5px;
+		color: gray;
 	}
 </style>
