@@ -13,10 +13,6 @@
 				</div>
 			</div>
 			<div class="addNode__inputWrap">
-				<!-- <input type="text" class="addNode__date addNode__input adminInput" placeholder="Дата (дд.мм.гг)"
-				v-model="newArticleDate"
-				:class="{error: validation.hasError('newArticleDate')}"
-				> -->
 				<masked-input class="addNode__date addNode__input adminInput"
 				placeholder="Дата (дд.мм.гг)"
 				v-model="newArticleDate"
@@ -45,12 +41,15 @@
 				Добавить
 			</button>
 		</div>
-		<div class="articlesList">
+		<div class="articlesList"
+		v-if="articles.length > 0"
+		>
 			<div class="articlesList__title thirdTitle">Список статей:</div>
 			<article-item
 			v-for="article in articles"
 			:key="article.id"
 			:article="article"
+			@removeArticle="removeArticle"
 			>
 			</article-item>
 		</div>
@@ -89,7 +88,7 @@ export default {
 		...mapGetters(['articles'])
 	},
 	methods: {
-		...mapMutations(['addNewArticle']),
+		...mapMutations(['addNewArticle', 'deleteArticle']),
 		...mapActions(['fetchArticles']),
 		addArticle() {
 			this.$validate().then(succes => {
@@ -105,6 +104,9 @@ export default {
 				this.newArticleContent = '';
 				this.validation.reset();
 			})
+		},
+		removeArticle(articleID) {
+			this.deleteArticle(articleID);
 		}
 	},
 	created() {

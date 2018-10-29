@@ -12,22 +12,46 @@
 			<td class="skillsItem__units">%</td>
 			<td class="skillsItem__btnWrap">
 				<button class="skillsItem__btn"
-				@click="removeSkill"
+				@click="openModal"
 				>Удалить</button>
 			</td>
 		</tr>
+		<transition name="modal">
+			<modal
+			v-show="showMobal"
+			@openModal="openModal"
+			@closeModal="closeModal"
+			@confirmModal="removeSkill"
+			>
+			</modal>
+		</transition>
 	</div>
 </template>
 
 <script>
+import modal from './modal';
 export default {
+	data() {
+		return {
+			showMobal: false
+		}
+	},
 	props: {
 		skill: Object
 	},
 	methods: {
 		removeSkill() {
 			this.$emit('removeSkill', this.skill.id);
+		},
+		openModal() {
+			this.showMobal = !this.showMobal;
+		},
+		closeModal() {
+			this.showMobal = false;
 		}
+	},
+	components: {
+		modal
 	}
 }
 </script>

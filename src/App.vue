@@ -16,6 +16,7 @@
 import appHeader from './components/header'
 import tabsList from './components/tabs'
 import about from './components/about'
+
 export default {
 	name: 'App',
 	components: {
@@ -47,6 +48,7 @@ export default {
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
+		padding-bottom: 50px;
 	}
 	.subtitle {
 		padding-top: 40px;
@@ -77,8 +79,26 @@ export default {
 	.adminBtn:active {
 		opacity: 0.7;
 	}
+	.delBtn {
+		background-color: #FD9156;
+	}
+	.delBtn:hover {
+		background-color: #FF7922;
+	}
+	.delSvg {
+		margin-top: 2px;
+		fill: #FFF
+	}
 	.errorMessage {
 		padding-left: 15px;
 		color: firebrick;
+	}
+
+	/*Animations*/
+	.modal-enter-active, .modal-leave-active {
+		transition: 0.3s;
+	}
+	.modal-enter, .modal-leave-to {
+		opacity: 0;
 	}
 </style>

@@ -88,10 +88,13 @@ export default {
 
 <style>
 	.skillsList {
-		padding-top: 20px;
+		padding-top: 30px;
 		padding-left: 35px;
 		padding-bottom: 35px;
 		border-bottom: 1px solid lightgray;
+	}
+	.skillsList:last-child {
+		border-bottom: 0;
 	}
 	.skillsList__table {
 		padding-left: 20px;

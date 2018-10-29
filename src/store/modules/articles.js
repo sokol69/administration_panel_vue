@@ -10,6 +10,9 @@ const articles = {
 	mutations: {
 		addNewArticle(state, article) {
 			state.data.push(article);
+		},
+		deleteArticle(state, articleID) {
+			state.data = state.data.filter(item => item.id !== articleID);
 		}
 	},
 	actions: {

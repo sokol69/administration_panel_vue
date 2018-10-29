@@ -14,10 +14,10 @@
 			</a>
 		</td>
 		<td class="worksItem__row worksItem__del">
-			<button class="adminBtn worksItem__delBtn"
+			<button class="adminBtn delBtn"
 			@click="openModal"
 			>
-				<svg class="worksItem__delSvg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<svg class="delSvg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				width="20px" height="20px" viewBox="0 0 348.333 348.334" style="enable-background:new 0 0 348.333 348.334;"
 				xml:space="preserve">
 					<g>
@@ -30,13 +30,15 @@
 				</svg>
 			</button>
 		</td>
-		<modal
-		v-show="showMobal"
-		@openModal="openModal"
-		@closeModal="closeModal"
-		@confirmModal="removeWork"
-		>
-		</modal>
+		<transition name="modal">
+			<modal
+			v-show="showMobal"
+			@openModal="openModal"
+			@closeModal="closeModal"
+			@confirmModal="removeWork"
+			>
+			</modal>
+		</transition>
 	</tr>
 </template>
 
@@ -94,14 +96,5 @@ export default {
 	}
 	.worksItem__del {
 		text-align: center;
-	}
-	.worksItem__delBtn {
-		background-color: #FD9156;
-	}
-	.worksItem__delBtn:hover {
-		background-color: #FF7922;
-	}
-	.worksItem__delSvg {
-		fill: #FFF
 	}
 </style>

@@ -216,6 +216,7 @@ export default {
 	}
 	.worksList__table {
 		width: 100%;
+		border-bottom: 1px solid lightgray;
 	}
 	.worksList__head {
 		margin-bottom: 10px;
